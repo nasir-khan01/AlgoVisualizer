@@ -13,6 +13,7 @@ export const useAnimation = <T>() => {
   const speedRef = useRef(50); // Default speed (1-100)
   const callbackRef = useRef<((step: T, index: number) => void) | null>(null); // Store callback for resume
   const onCompleteRef = useRef<(() => void) | undefined>(undefined); // Store onComplete callback
+  const animationTimeoutRef = useRef<number | null>(null); // Track timeout ID for cancellation
   
   // Function to calculate timeout based on speed
   const getTimeout = useCallback((speed: number) => {
@@ -105,12 +106,19 @@ export const useAnimation = <T>() => {
   
   // Pause animation
   const pauseAnimation = useCallback(() => {
+    console.log("Pausing animation - explicit call");
     setIsPaused(true);
     
     // Cancel the current animation frame
     if (animationFrameRef.current !== null) {
       cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = null;
+    }
+    
+    // Clear all pending timeouts to ensure no delayed callbacks fire
+    const highestId = window.setTimeout(() => {}, 0);
+    for (let i = 0; i < highestId; i++) {
+      window.clearTimeout(i);
     }
   }, []);
   

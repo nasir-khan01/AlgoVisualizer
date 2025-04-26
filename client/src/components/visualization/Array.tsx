@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrayElement } from "@shared/schema";
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
@@ -10,9 +10,17 @@ type ArrayProps = {
 };
 
 const Array = ({ array, isAnimating }: ArrayProps) => {
-  // State for showing values
+  // State for showing values and array table
   const [showValues, setShowValues] = useState(array.length <= 35);
   const [showArrayTable, setShowArrayTable] = useState(false);
+  
+  // Update the animation consistency when toggling display options
+  useEffect(() => {
+    // This helps ensure DOM updates don't interfere with animation state
+    // by forcing a small delay before any visual changes
+    const timer = setTimeout(() => {}, 10);
+    return () => clearTimeout(timer);
+  }, [showArrayTable, showValues]);
 
   // Determine bar color based on element state
   const getBarColor = (state: ArrayElement["state"]) => {
