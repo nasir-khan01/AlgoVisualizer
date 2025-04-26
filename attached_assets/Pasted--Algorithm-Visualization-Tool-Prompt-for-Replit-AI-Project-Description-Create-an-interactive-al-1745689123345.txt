@@ -1,0 +1,114 @@
+# Algorithm Visualization Tool Prompt for Replit AI
+
+## Project Description
+Create an interactive algorithm visualization web application using Next.js (frontend) and NestJS (backend). The app will visualize common algorithms like pathfinding and sorting with step-by-step animation.
+
+## Create the following files and components
+
+### Frontend (Next.js)
+
+```
+/app
+  /page.tsx - Main landing page
+  /layout.tsx - Root layout with theme providers
+  /algorithms
+    /pathfinding/page.tsx - Pathfinding visualization page
+    /sorting/page.tsx - Sorting visualization page
+  /components
+    /Navbar.tsx - Navigation component
+    /visualization
+      /Grid.tsx - Grid component for pathfinding
+      /Array.tsx - Array visualization for sorting
+      /Controls.tsx - Speed and algorithm selection controls
+    /ui
+      /Button.tsx - Reusable button component
+      /Slider.tsx - Speed control slider
+      /Select.tsx - Algorithm selection dropdown
+  /hooks
+    /useAlgorithm.ts - Custom hook for algorithm state
+    /useAnimation.ts - Animation controller hook
+  /lib
+    /algorithms
+      /pathfinding
+        /astar.ts - A* algorithm implementation
+        /dijkstra.ts - Dijkstra's algorithm
+        /bfs.ts - Breadth-first search
+        /dfs.ts - Depth-first search
+      /sorting
+        /quickSort.ts - Quick sort implementation
+        /mergeSort.ts - Merge sort implementation
+        /bubbleSort.ts - Bubble sort implementation
+  /types
+    /index.ts - TypeScript interfaces and types
+```
+
+### Backend (NestJS)
+
+```
+/src
+  /main.ts - Entry point
+  /app.module.ts - Root module
+  /algorithms
+    /algorithms.module.ts - Algorithms module
+    /algorithms.controller.ts - API endpoints
+    /algorithms.service.ts - Algorithm service implementation
+    /dto
+      /algorithm-request.dto.ts - Request validation
+      /algorithm-response.dto.ts - Response structure
+    /pathfinding
+      /pathfinding.service.ts - Pathfinding algorithms
+    /sorting
+      /sorting.service.ts - Sorting algorithms
+  /common
+    /interfaces
+      /algorithm.interface.ts - Common interfaces
+    /utils
+      /algorithm-helper.ts - Helper functions
+  /config
+    /swagger.config.ts - API documentation
+```
+
+## Technical Requirements
+
+1. **Frontend (Next.js)**:
+   - Implement React components using TypeScript
+   - Use Tailwind CSS for styling
+   - Create responsive visualization components that work on different screen sizes
+   - Implement animation using Framer Motion
+   - Use React Context for state management
+   - Add client-side interactivity for algorithm controls
+
+2. **Backend (NestJS)**:
+   - Create REST API endpoints for each algorithm
+   - Implement algorithm logic as services
+   - Set up validation using class-validator
+   - Configure Swagger for API documentation
+   - Implement proper error handling
+
+3. **Algorithm Implementation**:
+   - Each algorithm should expose its internal steps for visualization
+   - Support for pausing, resuming, and speed control
+   - Provide visual feedback on algorithm progress
+   - Include informative metrics (operations count, time complexity)
+
+## Example Implementation Request
+
+Please implement the Grid.tsx component for the pathfinding visualization that:
+- Creates a responsive grid of cells
+- Allows marking start and end points
+- Supports adding wall obstacles
+- Visualizes the path finding process with appropriate colors
+- Works with the animation hook to show step-by-step progress
+
+Then implement the A* algorithm (astar.ts) that returns each step of the calculation for visualization.
+
+## Additional Notes
+
+- Use TypeScript for all code files
+- Ensure proper error handling
+- Add comments explaining complex logic
+- Follow best practices for both Next.js and NestJS
+- Implement responsive design for all UI components
+
+---
+Answer from Perplexity: pplx.ai/share
