@@ -11,6 +11,7 @@ export const useAnimation = <T>() => {
   const stepsRef = useRef<T[]>([]);
   const currentStepRef = useRef(0);
   const speedRef = useRef(50); // Default speed (1-100)
+  const callbackRef = useRef<((step: T, index: number) => void) | null>(null); // Store callback for resume
   
   // Function to calculate timeout based on speed
   const getTimeout = useCallback((speed: number) => {
@@ -33,6 +34,7 @@ export const useAnimation = <T>() => {
     stepsRef.current = steps;
     currentStepRef.current = 0;
     speedRef.current = speed;
+    callbackRef.current = callback; // Store callback for use in resumeAnimation
     
     // Clear any existing animation frame
     if (animationFrameRef.current !== null) {
@@ -47,6 +49,18 @@ export const useAnimation = <T>() => {
         
         // Move to the next step
         currentStepRef.current++;
+        
+        // Update metrics with current progress for real-time display
+        if (algorithmMetrics) {
+          // Calculate progress percentage
+          const progress = Math.min((currentStepRef.current / stepsRef.current.length) * 100, 100);
+          
+          // Update metrics object with current progress
+          setMetrics(prevMetrics => ({
+            ...algorithmMetrics,
+            progress: progress
+          }));
+        }
         
         // Schedule the next frame with timeout based on speed
         const timeout = getTimeout(speedRef.current);
@@ -79,19 +93,25 @@ export const useAnimation = <T>() => {
   
   // Resume animation
   const resumeAnimation = useCallback(() => {
-    if (!isAnimating) return;
+    if (!isAnimating || !callbackRef.current) return;
     
     setIsPaused(false);
     
     // Restart the animation loop from where it left off
     const animate = () => {
       if (currentStepRef.current < stepsRef.current.length) {
-        // Call the callback with the current step
-        const callback = (step: T, index: number) => {};
-        callback(stepsRef.current[currentStepRef.current], currentStepRef.current);
+        // Call the stored callback with the current step
+        callbackRef.current!(stepsRef.current[currentStepRef.current], currentStepRef.current);
         
         // Move to the next step
         currentStepRef.current++;
+        
+        // Update metrics with current progress
+        const progress = Math.min((currentStepRef.current / stepsRef.current.length) * 100, 100);
+        setMetrics(prevMetrics => prevMetrics ? {
+          ...prevMetrics,
+          progress: progress
+        } : null);
         
         // Schedule the next frame with timeout based on speed
         const timeout = getTimeout(speedRef.current);
