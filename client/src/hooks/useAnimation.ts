@@ -16,15 +16,19 @@ export const useAnimation = <T>() => {
   
   // Function to calculate timeout based on speed
   const getTimeout = useCallback((speed: number) => {
-    // Convert speed (1-10) to timeout in a non-linear way for better control
-    // Speed 1 = 1000ms, Speed 5 = 200ms, Speed 10 = 10ms
+    // Convert speed (1-100) to timeout with a more gradual decrease
+    // Speed 1 = 1000ms (slowest), Speed 100 = 10ms (fastest)
     const maxDelay = 1000; // 1 second for slowest
     const minDelay = 10; // 10ms for fastest
     
-    // Use an exponential function to map speed to delay
-    // This gives better granularity at higher speeds
-    const normalizedSpeed = speed / 10; // 0.1 to 1
-    const delay = maxDelay * Math.pow(minDelay / maxDelay, normalizedSpeed);
+    // Use a logarithmic function to map speed to delay for a more gradual change
+    // This creates a more even perception of speed changes
+    const normalizedSpeed = speed / 100; // 0.01 to 1
+    const logFactor = 20; // Controls the curve of the logarithmic function
+    
+    // Calculate delay with a logarithmic curve
+    // This gives more granular control in the middle speed range
+    const delay = maxDelay - (maxDelay - minDelay) * (Math.log(1 + normalizedSpeed * logFactor) / Math.log(1 + logFactor));
     
     console.log(`Animation speed ${speed} maps to delay of ${Math.round(delay)}ms`);
     return Math.round(delay);
@@ -114,6 +118,12 @@ export const useAnimation = <T>() => {
   const resumeAnimation = useCallback(() => {
     if (!isAnimating || !callbackRef.current) return;
     
+    // If we're at the end of the animation, restart from the beginning
+    if (currentStepRef.current >= stepsRef.current.length) {
+      console.log("Restarting animation from the beginning");
+      currentStepRef.current = 0;
+    }
+    
     setIsPaused(false);
     
     // Restart the animation loop from where it left off
@@ -144,8 +154,10 @@ export const useAnimation = <T>() => {
         setIsAnimating(true);
         setIsPaused(true);
         
-        // Note: We don't call onComplete here since it should have been called already
-        // during the initial animation. If needed, we can store and call it here too.
+        // Call onComplete again if it exists
+        if (onCompleteRef.current) {
+          onCompleteRef.current();
+        }
       }
     };
     

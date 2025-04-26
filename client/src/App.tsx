@@ -17,8 +17,8 @@ function Router() {
       <Navbar />
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/pathfinding" component={Pathfinding} />
         <Route path="/sorting" component={Sorting} />
+        <Route path="/pathfinding" component={Pathfinding} />
         <Route path="/about" component={About} />
         <Route component={NotFound} />
       </Switch>

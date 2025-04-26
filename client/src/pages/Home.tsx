@@ -16,16 +16,6 @@ const Home = () => {
       {/* Algorithm Categories */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         <CategoryCard
-          title="Pathfinding Algorithms"
-          description="Visualize how algorithms find optimal paths in a grid with obstacles"
-          icon={<FaRoute className="text-blue-600 dark:text-blue-300 text-xl" />}
-          iconBgClass="bg-blue-100 dark:bg-blue-900"
-          buttonText="Explore Pathfinding"
-          buttonLink="/pathfinding"
-          buttonColorClass="bg-blue-600 hover:bg-blue-700 focus:ring-blue-500"
-        />
-
-        <CategoryCard
           title="Sorting Algorithms"
           description="Watch the step-by-step process of various sorting algorithms in action"
           icon={<FaSort className="text-amber-600 dark:text-amber-300 text-xl" />}
@@ -33,6 +23,16 @@ const Home = () => {
           buttonText="Explore Sorting"
           buttonLink="/sorting"
           buttonColorClass="bg-amber-600 hover:bg-amber-700 focus:ring-amber-500"
+        />
+
+        <CategoryCard
+          title="Pathfinding Algorithms"
+          description="Visualize how algorithms find optimal paths in a grid with obstacles"
+          icon={<FaRoute className="text-blue-600 dark:text-blue-300 text-xl" />}
+          iconBgClass="bg-blue-100 dark:bg-blue-900"
+          buttonText="Explore Pathfinding"
+          buttonLink="/pathfinding"
+          buttonColorClass="bg-blue-600 hover:bg-blue-700 focus:ring-blue-500"
         />
       </div>
 
@@ -47,29 +47,6 @@ const Home = () => {
           </div>
           <div className="p-6">
             <div className="space-y-6">
-              <div>
-                <h4 className="text-md font-medium mb-2">Pathfinding Algorithms</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-                    <h5 className="font-medium text-blue-600 dark:text-blue-400 mb-1">A* Algorithm</h5>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                      A* uses a best-first search approach that uses both the cost to reach the node and a heuristic that estimates the cost to reach the goal.
-                    </p>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
-                      <span className="font-medium">Time Complexity:</span> O(E log V)
-                    </div>
-                  </div>
-                  <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-                    <h5 className="font-medium text-blue-600 dark:text-blue-400 mb-1">Dijkstra's Algorithm</h5>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                      Dijkstra's algorithm finds the shortest path between nodes in a graph, which may represent, for example, road networks.
-                    </p>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
-                      <span className="font-medium">Time Complexity:</span> O(E + V log V)
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div>
                 <h4 className="text-md font-medium mb-2">Sorting Algorithms</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -89,6 +66,29 @@ const Home = () => {
                     </p>
                     <div className="text-xs text-gray-500 dark:text-gray-400">
                       <span className="font-medium">Time Complexity:</span> O(n log n)
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 className="text-md font-medium mb-2">Pathfinding Algorithms</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+                    <h5 className="font-medium text-blue-600 dark:text-blue-400 mb-1">A* Algorithm</h5>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      A* uses a best-first search approach that uses both the cost to reach the node and a heuristic that estimates the cost to reach the goal.
+                    </p>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      <span className="font-medium">Time Complexity:</span> O(E log V)
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+                    <h5 className="font-medium text-blue-600 dark:text-blue-400 mb-1">Dijkstra's Algorithm</h5>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      Dijkstra's algorithm finds the shortest path between nodes in a graph, which may represent, for example, road networks.
+                    </p>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      <span className="font-medium">Time Complexity:</span> O(E + V log V)
                     </div>
                   </div>
                 </div>
