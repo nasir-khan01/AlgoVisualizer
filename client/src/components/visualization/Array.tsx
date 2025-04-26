@@ -71,7 +71,12 @@ const Array = ({ array, isAnimating }: ArrayProps) => {
           <Switch 
             id="show-array-table" 
             checked={showArrayTable}
-            onCheckedChange={setShowArrayTable}
+            onCheckedChange={(checked) => {
+              // Small delay to avoid state issues during animation
+              setTimeout(() => {
+                setShowArrayTable(checked);
+              }, 5);
+            }}
           />
           <Label htmlFor="show-array-table">Show Array Table</Label>
         </div>

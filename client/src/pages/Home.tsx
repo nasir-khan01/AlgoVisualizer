@@ -1,6 +1,5 @@
 import { Link } from "wouter";
 import CategoryCard from "@/components/ui/CategoryCard";
-import { FaRoute, FaSort } from "react-icons/fa";
 
 const Home = () => {
   return (
@@ -18,7 +17,15 @@ const Home = () => {
         <CategoryCard
           title="Sorting Algorithms"
           description="Watch the step-by-step process of various sorting algorithms in action"
-          icon={<FaSort className="text-amber-600 dark:text-amber-300 text-xl" />}
+          icon={
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-amber-600 dark:text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="4" y1="8" x2="20" y2="8"></line>
+              <line x1="4" y1="16" x2="20" y2="16"></line>
+              <line x1="9" y1="12" x2="15" y2="12"></line>
+              <line x1="12" y1="4" x2="12" y2="8"></line>
+              <line x1="12" y1="16" x2="12" y2="20"></line>
+            </svg>
+          }
           iconBgClass="bg-amber-100 dark:bg-amber-900"
           buttonText="Explore Sorting"
           buttonLink="/sorting"
@@ -28,7 +35,12 @@ const Home = () => {
         <CategoryCard
           title="Pathfinding Algorithms"
           description="Visualize how algorithms find optimal paths in a grid with obstacles"
-          icon={<FaRoute className="text-blue-600 dark:text-blue-300 text-xl" />}
+          icon={
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600 dark:text-blue-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"></path>
+              <path d="M13 13l6 6"></path>
+            </svg>
+          }
           iconBgClass="bg-blue-100 dark:bg-blue-900"
           buttonText="Explore Pathfinding"
           buttonLink="/pathfinding"
@@ -118,7 +130,7 @@ const Home = () => {
             </div>
             <div className="mt-8 md:mt-0 md:order-1 text-center md:text-left">
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                &copy; 2023 AlgoViz. All rights reserved.
+                &copy; 2025 AlgorithmViz. All rights reserved.
               </p>
             </div>
           </div>
