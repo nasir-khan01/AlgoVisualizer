@@ -15,9 +15,18 @@ export const useAnimation = <T>() => {
   
   // Function to calculate timeout based on speed
   const getTimeout = useCallback((speed: number) => {
-    // Map speed (1-100) to timeout (500ms-10ms)
-    // Higher speed = lower timeout = faster animation
-    return 500 - (speed * 4.9); // Maps 1 -> 495ms, 100 -> 10ms
+    // Convert speed (1-10) to timeout in a non-linear way for better control
+    // Speed 1 = 1000ms, Speed 5 = 200ms, Speed 10 = 10ms
+    const maxDelay = 1000; // 1 second for slowest
+    const minDelay = 10; // 10ms for fastest
+    
+    // Use an exponential function to map speed to delay
+    // This gives better granularity at higher speeds
+    const normalizedSpeed = speed / 10; // 0.1 to 1
+    const delay = maxDelay * Math.pow(minDelay / maxDelay, normalizedSpeed);
+    
+    console.log(`Animation speed ${speed} maps to delay of ${Math.round(delay)}ms`);
+    return Math.round(delay);
   }, []);
   
   // Start animation with the given steps

@@ -31,6 +31,21 @@ const Array = ({ array, isAnimating }: ArrayProps) => {
   // Calculate max value for height normalization
   const maxValue = Math.max(...array.map(el => el.value), 1);
   
+  // Calculate optimal bar width and spacing based on array size
+  const getBarWidth = () => {
+    if (array.length > 100) return '2px';
+    if (array.length > 50) return '4px';
+    if (array.length > 25) return '8px';
+    return '16px';
+  };
+  
+  const getBarSpacing = () => {
+    if (array.length > 100) return 'mx-[1px]';
+    if (array.length > 50) return 'mx-px';
+    if (array.length > 25) return 'mx-[2px]';
+    return 'mx-1';
+  };
+  
   return (
     <div className="space-y-3">
       {/* Controls for visualization */}
@@ -65,13 +80,14 @@ const Array = ({ array, isAnimating }: ArrayProps) => {
             <div
               key={index}
               className={cn(
-                "array-bar mx-px relative",
+                "array-bar relative",
+                getBarSpacing(),
                 getBarColor(element.state),
                 isAnimating ? "transition-all duration-200" : ""
               )}
               style={{
                 height: `${(element.value / maxValue) * 90}%`, // 90% to leave some space at the top
-                width: array.length > 50 ? '4px' : array.length > 25 ? '8px' : '16px'
+                width: getBarWidth()
               }}
               title={`Value: ${element.value}`}
             >

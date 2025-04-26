@@ -152,6 +152,9 @@ export const useAlgorithm = (initialGridSize: { rows: number; cols: number }) =>
   
   // Clear all walls, weights, and visited nodes but keep start and end
   const clearGrid = useCallback(() => {
+    console.log("Clearing entire grid");
+    
+    // Create a fresh empty grid
     const newGrid = createEmptyGrid(initialGridSize.rows, initialGridSize.cols);
     
     // Preserve start and end nodes
@@ -163,21 +166,54 @@ export const useAlgorithm = (initialGridSize: { rows: number; cols: number }) =>
       newGrid[endNode.row][endNode.col].type = "end";
     }
     
+    // Reset all visual elements in the DOM
+    for (let row = 0; row < initialGridSize.rows; row++) {
+      for (let col = 0; col < initialGridSize.cols; col++) {
+        const cellElement = document.getElementById(`node-${row}-${col}`);
+        if (cellElement) {
+          const innerDiv = cellElement.querySelector('div');
+          if (innerDiv) {
+            // Set appropriate class based on node type
+            const nodeType = newGrid[row][col].type;
+            if (nodeType === "start") {
+              innerDiv.className = "absolute inset-0 bg-green-500";
+            } else if (nodeType === "end") {
+              innerDiv.className = "absolute inset-0 bg-red-500";
+            } else {
+              innerDiv.className = "absolute inset-0";
+            }
+          }
+        }
+      }
+    }
+    
     setGrid(newGrid);
   }, [initialGridSize, createEmptyGrid, startNode, endNode]);
   
   // Clear visited and path nodes but keep walls and weights
   const clearPath = useCallback(() => {
+    console.log("Clearing path");
     const newGrid = [...grid];
     
     for (let row = 0; row < newGrid.length; row++) {
       for (let col = 0; col < newGrid[0].length; col++) {
         const node = newGrid[row][col];
         
-        if (node.type === "visited" || node.type === "path") {
-          node.type = "empty";
+        // Reset the node styling in the DOM
+        const cellElement = document.getElementById(`node-${row}-${col}`);
+        if (cellElement) {
+          const innerDiv = cellElement.querySelector('div');
+          if (innerDiv) {
+            // Only reset non-special nodes (not start/end/wall/weight)
+            if (node.type !== "start" && node.type !== "end" && 
+                node.type !== "wall" && node.type !== "weight") {
+              innerDiv.className = "absolute inset-0";
+              node.type = "empty";
+            }
+          }
         }
         
+        // Reset algorithmic properties
         node.isVisited = false;
         node.distance = Infinity;
         node.fScore = Infinity;
@@ -187,7 +223,7 @@ export const useAlgorithm = (initialGridSize: { rows: number; cols: number }) =>
       }
     }
     
-    setGrid(newGrid);
+    setGrid([...newGrid]); // Create a new reference to trigger re-render
   }, [grid]);
   
   // Generate a random maze

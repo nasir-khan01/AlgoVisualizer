@@ -158,8 +158,9 @@ const Sorting = () => {
     }
   };
   
-  // Preparing state for algorithm metrics
+  // States for algorithm metrics and preparation
   const [preparing, setPreparing] = useState(false);
+  const [showMetrics, setShowMetrics] = useState(false);
 
   // Helper function to get time complexity string based on algorithm
   const getTimeComplexity = (algorithm: SortingAlgorithm): string => {
@@ -290,6 +291,15 @@ const Sorting = () => {
                     <div className="flex flex-col items-center">
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mb-2"></div>
                       <p className="text-sm text-gray-500 dark:text-gray-400">Preparing {selectedAlgorithm} algorithm...</p>
+                    </div>
+                  </div>
+                ) : !showMetrics ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="text-center">
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Run the algorithm to see metrics</p>
+                      <div className="text-xs text-gray-400 dark:text-gray-500">
+                        Metrics will be displayed after sorting is complete
+                      </div>
                     </div>
                   </div>
                 ) : (
