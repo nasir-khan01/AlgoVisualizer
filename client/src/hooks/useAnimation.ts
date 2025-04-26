@@ -133,19 +133,29 @@ export const useAnimation = <T>() => {
   
   // Reset animation
   const resetAnimation = useCallback(() => {
-    setIsAnimating(false);
-    setIsPaused(false);
-    setMetrics(null);
-    
-    // Clear the animation state
-    stepsRef.current = [];
-    currentStepRef.current = 0;
-    
-    // Cancel any running animation
+    // First cancel any ongoing animation
     if (animationFrameRef.current !== null) {
       cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = null;
     }
+    
+    // Clear all timeouts
+    const highestId = window.setTimeout(() => {}, 0);
+    for (let i = 0; i < highestId; i++) {
+      window.clearTimeout(i);
+    }
+    
+    // Reset the state
+    setIsAnimating(false);
+    setIsPaused(false);
+    setMetrics(null);
+    
+    // Clear the animation data
+    stepsRef.current = [];
+    currentStepRef.current = 0;
+    callbackRef.current = null;
+    
+    console.log("Animation fully reset");
   }, []);
   
   return {

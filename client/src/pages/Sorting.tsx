@@ -24,6 +24,12 @@ const Sorting = () => {
 
   // Initialize or randomize the array
   const randomizeArray = () => {
+    console.log("Randomizing array and resetting animation");
+    
+    // First reset the animation completely
+    resetAnimation();
+    
+    // Then generate a new array
     const newArray: ArrayElement[] = [];
     for (let i = 0; i < arraySize; i++) {
       newArray.push({
@@ -31,8 +37,9 @@ const Sorting = () => {
         state: "default" as const
       });
     }
+    
+    // Set the new array
     setArray(newArray);
-    resetAnimation();
   };
 
   // Initialize array on component mount or when size changes
@@ -45,17 +52,24 @@ const Sorting = () => {
     randomizeArray();
   }, [arraySize]);
 
-  // Handle start sorting button click
+  // Handle start/stop sorting button click
   const handleSortClick = async () => {
+    // If animation is running, pause it
     if (isAnimating && !isPaused) {
+      console.log("Pausing animation");
       pauseAnimation();
       return;
     }
     
+    // If animation is paused, resume it
     if (isAnimating && isPaused) {
+      console.log("Resuming animation");
       resumeAnimation();
       return;
     }
+    
+    // Clear any running animation before starting a new one
+    resetAnimation();
     
     try {
       // Reset array states

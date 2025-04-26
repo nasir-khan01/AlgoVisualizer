@@ -53,15 +53,22 @@ const Pathfinding = () => {
       return;
     }
     
+    // If animation is running, pause it
     if (isAnimating && !isPaused) {
+      console.log("Pausing animation");
       pauseAnimation();
       return;
     }
     
+    // If animation is paused, resume it
     if (isAnimating && isPaused) {
+      console.log("Resuming animation");
       resumeAnimation();
       return;
     }
+    
+    // Reset animation before starting a new one
+    resetAnimation();
     
     // Clear previous path before starting new animation
     clearPath();

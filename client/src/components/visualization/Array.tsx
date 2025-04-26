@@ -27,26 +27,33 @@ const Array = ({ array, isAnimating }: ArrayProps) => {
   
   return (
     <div className="border border-gray-200 dark:border-gray-700 rounded bg-white dark:bg-gray-800 h-96 flex items-end justify-center p-4">
-      {array.map((element, index) => (
-        <div
-          key={index}
-          className={cn(
-            "array-bar mx-px",
-            getBarColor(element.state),
-            isAnimating && "transition-all duration-200"
-          )}
-          style={{
-            height: `${(element.value / maxValue) * 90}%`, // 90% to leave some space at the top
-            width: array.length > 50 ? '2px' : array.length > 25 ? '4px' : '8px'
-          }}
-        >
-          {array.length <= 20 && (
-            <div className="text-xs text-center mt-2 rotate-90 origin-bottom-left">
-              {element.value}
-            </div>
-          )}
+      {array.length === 0 ? (
+        <div className="text-gray-400 dark:text-gray-600 flex items-center justify-center h-full w-full">
+          No array to visualize
         </div>
-      ))}
+      ) : (
+        array.map((element, index) => (
+          <div
+            key={index}
+            className={cn(
+              "array-bar mx-px relative",
+              getBarColor(element.state),
+              isAnimating ? "transition-all duration-200" : ""
+            )}
+            style={{
+              height: `${(element.value / maxValue) * 90}%`, // 90% to leave some space at the top
+              width: array.length > 50 ? '4px' : array.length > 25 ? '8px' : '16px'
+            }}
+            title={`Value: ${element.value}`}
+          >
+            {array.length <= 20 && (
+              <div className="text-xs text-white font-bold absolute bottom-1 left-1/2 transform -translate-x-1/2">
+                {element.value}
+              </div>
+            )}
+          </div>
+        ))
+      )}
     </div>
   );
 };
