@@ -19,7 +19,8 @@ const Sorting = () => {
     startAnimation,
     pauseAnimation,
     resumeAnimation,
-    resetAnimation
+    resetAnimation,
+    setSpeed
   } = useAnimation<{ array: ArrayElement[], indices?: number[] }>();
 
   // Initialize or randomize the array
@@ -254,7 +255,13 @@ const Sorting = () => {
               arraySize={arraySize}
               onArraySizeChange={setArraySize}
               speed={animationSpeed}
-              onSpeedChange={setAnimationSpeed}
+              onSpeedChange={(newSpeed) => {
+                setAnimationSpeed(newSpeed);
+                if (isAnimating) {
+                  // If animation is running, also update the animation speed
+                  setSpeed(newSpeed);
+                }
+              }}
               onVisualize={handleSortClick}
               onReset={randomizeArray}
               isAnimating={isAnimating}

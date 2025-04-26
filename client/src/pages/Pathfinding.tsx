@@ -44,7 +44,8 @@ const Pathfinding = () => {
     startAnimation,
     pauseAnimation,
     resumeAnimation,
-    resetAnimation
+    resetAnimation,
+    setSpeed
   } = useAnimation<GridNode>();
 
   const handleVisualizeClick = async () => {
@@ -203,7 +204,13 @@ const Pathfinding = () => {
               selectedTool={selectedTool}
               onToolChange={setSelectedTool}
               speed={animationSpeed}
-              onSpeedChange={setAnimationSpeed}
+              onSpeedChange={(newSpeed) => {
+                setAnimationSpeed(newSpeed);
+                if (isAnimating) {
+                  // If animation is running, also update the animation speed
+                  setSpeed(newSpeed);
+                }
+              }}
               onVisualize={handleVisualizeClick}
               onReset={handleResetClick}
               onClearPath={handleClearPathClick}
