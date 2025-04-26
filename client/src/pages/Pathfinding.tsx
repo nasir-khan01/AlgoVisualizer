@@ -84,7 +84,9 @@ const Pathfinding = () => {
       
       // We'll fetch the specific algorithm implementation dynamically
       /* @vite-ignore */
+      console.log(`Loading pathfinding algorithm: ${selectedAlgorithm}`);
       const algorithm = await import(`../lib/algorithms/pathfinding/${selectedAlgorithm}.ts`);
+      console.log("Pathfinding algorithm loaded:", algorithm);
       const result = algorithm.default(grid, startNode, endNode);
       
       // Calculate execution time

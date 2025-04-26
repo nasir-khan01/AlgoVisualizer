@@ -70,7 +70,16 @@ const Sorting = () => {
       
       // Import the sorting algorithm dynamically
       /* @vite-ignore */
-      const algorithm = await import(`../lib/algorithms/sorting/${selectedAlgorithm}.ts`);
+      // Convert algorithm names to match file names (camelCase vs. PascalCase)
+      const algorithmFileName = selectedAlgorithm === 'quicksort' ? 'quickSort' :
+                               selectedAlgorithm === 'mergesort' ? 'mergeSort' :
+                               selectedAlgorithm === 'bubblesort' ? 'bubbleSort' :
+                               selectedAlgorithm === 'heapsort' ? 'heapSort' :
+                               selectedAlgorithm === 'insertionsort' ? 'insertionSort' :
+                               selectedAlgorithm;
+      
+      console.log(`Mapped algorithm name: ${selectedAlgorithm} -> ${algorithmFileName}`);
+      const algorithm = await import(`../lib/algorithms/sorting/${algorithmFileName}.ts`);
       console.log("Algorithm loaded:", algorithm);
       
       // Get the animation frames from the algorithm
