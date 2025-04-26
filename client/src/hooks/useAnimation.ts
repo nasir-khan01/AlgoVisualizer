@@ -34,7 +34,8 @@ export const useAnimation = <T>() => {
     steps: T[],
     callback: (step: T, index: number) => void,
     algorithmMetrics: AlgorithmMetrics,
-    speed: number = 50
+    speed: number = 50,
+    onComplete?: () => void
   ) => {
     setIsAnimating(true);
     setIsPaused(false);
@@ -82,6 +83,11 @@ export const useAnimation = <T>() => {
         // Animation complete
         setIsAnimating(true); // Keep isAnimating true so user can reset
         setIsPaused(true);
+        
+        // Call onComplete callback if provided
+        if (onComplete) {
+          onComplete();
+        }
       }
     };
     
@@ -133,6 +139,9 @@ export const useAnimation = <T>() => {
         // Animation complete
         setIsAnimating(true);
         setIsPaused(true);
+        
+        // Note: We don't call onComplete here since it should have been called already
+        // during the initial animation. If needed, we can store and call it here too.
       }
     };
     

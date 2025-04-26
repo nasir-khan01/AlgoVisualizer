@@ -29,8 +29,9 @@ const Sorting = () => {
     // First reset the animation completely
     resetAnimation();
     
-    // Reset preparing state
+    // Reset states
     setPreparing(false);
+    setShowMetrics(false);
     
     // Then generate a new array
     const newArray: ArrayElement[] = [];
@@ -129,7 +130,12 @@ const Sorting = () => {
           setArray(frame.array);
         },
         algorithmMetrics,
-        animationSpeed
+        animationSpeed,
+        () => {
+          // This is called when the animation completes
+          console.log("Animation complete, showing metrics");
+          setShowMetrics(true);
+        }
       );
       
       // Log the execution to the backend
