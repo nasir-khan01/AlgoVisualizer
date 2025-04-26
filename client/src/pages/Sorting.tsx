@@ -28,7 +28,7 @@ const Sorting = () => {
     for (let i = 0; i < arraySize; i++) {
       newArray.push({
         value: Math.floor(Math.random() * 90) + 10, // Random value between 10-99
-        state: "default"
+        state: "default" as const
       });
     }
     setArray(newArray);
@@ -59,14 +59,15 @@ const Sorting = () => {
     
     try {
       // Reset array states
-      const initialArray = array.map(el => ({ ...el, state: "default" }));
+      const initialArray = array.map(el => ({ ...el, state: "default" as const }));
       setArray(initialArray);
       
       // Record start time for metrics
       const startTime = performance.now();
       
       // Import the sorting algorithm dynamically
-      const algorithm = await import(`@/lib/algorithms/sorting/${selectedAlgorithm}`);
+      /* @vite-ignore */
+      const algorithm = await import(`../lib/algorithms/sorting/${selectedAlgorithm}.ts`);
       
       // Get the animation frames from the algorithm
       const frames = algorithm.default([...initialArray.map(el => el.value)]);

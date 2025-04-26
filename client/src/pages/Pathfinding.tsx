@@ -45,7 +45,7 @@ const Pathfinding = () => {
     pauseAnimation,
     resumeAnimation,
     resetAnimation
-  } = useAnimation<GridNode[]>();
+  } = useAnimation<GridNode>();
 
   const handleVisualizeClick = async () => {
     if (!startNode || !endNode) {
@@ -83,7 +83,8 @@ const Pathfinding = () => {
       const startTime = performance.now();
       
       // We'll fetch the specific algorithm implementation dynamically
-      const algorithm = await import(`@/lib/algorithms/pathfinding/${selectedAlgorithm}`);
+      /* @vite-ignore */
+      const algorithm = await import(`../lib/algorithms/pathfinding/${selectedAlgorithm}.ts`);
       const result = algorithm.default(grid, startNode, endNode);
       
       // Calculate execution time
