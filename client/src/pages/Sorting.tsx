@@ -65,12 +65,17 @@ const Sorting = () => {
       // Record start time for metrics
       const startTime = performance.now();
       
+      // Log the algorithm we're trying to load
+      console.log(`Loading algorithm: ${selectedAlgorithm}`);
+      
       // Import the sorting algorithm dynamically
       /* @vite-ignore */
       const algorithm = await import(`../lib/algorithms/sorting/${selectedAlgorithm}.ts`);
+      console.log("Algorithm loaded:", algorithm);
       
       // Get the animation frames from the algorithm
       const frames = algorithm.default([...initialArray.map(el => el.value)]);
+      console.log("Animation frames generated:", frames);
       
       // Calculate execution time
       const endTime = performance.now();
@@ -110,6 +115,11 @@ const Sorting = () => {
       
     } catch (error) {
       console.error("Error during sorting:", error);
+      console.error("Error details:", {
+        algorithm: selectedAlgorithm,
+        error: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined
+      });
     }
   };
   
