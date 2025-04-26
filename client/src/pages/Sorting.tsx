@@ -7,7 +7,7 @@ import { ArrayElement, SortingAlgorithm, AlgorithmMetrics } from "@shared/schema
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 const Sorting = () => {
-  const [arraySize, setArraySize] = useState(40);
+  const [arraySize, setArraySize] = useState(6);
   const [array, setArray] = useState<ArrayElement[]>([]);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<SortingAlgorithm>("quicksort");
   const [animationSpeed, setAnimationSpeed] = useState(50); // 1-100

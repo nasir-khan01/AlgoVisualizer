@@ -141,16 +141,16 @@ const Controls = ({
               Array Size: {arraySize}
             </label>
             <Slider
-              value={[arraySize || 40]}
+              value={[arraySize || 6]}
               min={5}
-              max={100}
+              max={15}
               step={1}
               onValueChange={(value) => onArraySizeChange(value[0])}
               className="w-full"
             />
             <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
               <span>5</span>
-              <span>100</span>
+              <span>15</span>
             </div>
           </div>
         )}

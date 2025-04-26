@@ -12,6 +12,7 @@ export const useAnimation = <T>() => {
   const currentStepRef = useRef(0);
   const speedRef = useRef(50); // Default speed (1-100)
   const callbackRef = useRef<((step: T, index: number) => void) | null>(null); // Store callback for resume
+  const onCompleteRef = useRef<(() => void) | undefined>(undefined); // Store onComplete callback
   
   // Function to calculate timeout based on speed
   const getTimeout = useCallback((speed: number) => {
@@ -45,6 +46,9 @@ export const useAnimation = <T>() => {
     currentStepRef.current = 0;
     speedRef.current = speed;
     callbackRef.current = callback; // Store callback for use in resumeAnimation
+    
+    // Store onComplete callback for later use
+    onCompleteRef.current = onComplete;
     
     // Clear any existing animation frame
     if (animationFrameRef.current !== null) {
@@ -85,8 +89,8 @@ export const useAnimation = <T>() => {
         setIsPaused(true);
         
         // Call onComplete callback if provided
-        if (onComplete) {
-          onComplete();
+        if (onCompleteRef.current) {
+          onCompleteRef.current();
         }
       }
     };
@@ -176,6 +180,12 @@ export const useAnimation = <T>() => {
     console.log("Animation fully reset");
   }, []);
   
+  // Allow changing speed during animation
+  const setSpeed = useCallback((newSpeed: number) => {
+    console.log(`Updating animation speed to ${newSpeed}`);
+    speedRef.current = newSpeed;
+  }, []);
+  
   return {
     isAnimating,
     isPaused,
@@ -183,6 +193,7 @@ export const useAnimation = <T>() => {
     startAnimation,
     pauseAnimation,
     resumeAnimation,
-    resetAnimation
+    resetAnimation,
+    setSpeed
   };
 };
