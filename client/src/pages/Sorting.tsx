@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Array from "@/components/visualization/Array";
 import Controls from "@/components/visualization/Controls";
 import { useAnimation } from "@/hooks/useAnimation";
@@ -36,9 +36,14 @@ const Sorting = () => {
   };
 
   // Initialize array on component mount or when size changes
-  useState(() => {
+  useEffect(() => {
     randomizeArray();
-  });
+  }, []);
+  
+  // Re-randomize array when array size changes
+  useEffect(() => {
+    randomizeArray();
+  }, [arraySize]);
 
   // Handle start sorting button click
   const handleSortClick = async () => {

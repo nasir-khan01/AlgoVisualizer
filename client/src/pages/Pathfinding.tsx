@@ -101,22 +101,28 @@ const Pathfinding = () => {
       // Start animation with visited nodes first, then path
       startAnimation(
         [...result.visitedNodesInOrder, ...(result.path || [])],
-        (node, index) => {
+        (node: GridNode, index: number) => {
           // The animation callback - will be called for each node during animation
           if (index < result.visitedNodesInOrder.length) {
             // We're animating visited nodes
-            if (!node.isStart && !node.isEnd) {
+            if (node.type !== "start" && node.type !== "end") {
               const cellElement = document.getElementById(`node-${node.row}-${node.col}`);
               if (cellElement) {
-                cellElement.className = "cell-visited";
+                const innerDiv = cellElement.querySelector('div');
+                if (innerDiv) {
+                  innerDiv.className = "absolute inset-0 bg-blue-300 dark:bg-blue-800";
+                }
               }
             }
           } else {
             // We're animating the path
-            if (!node.isStart && !node.isEnd) {
+            if (node.type !== "start" && node.type !== "end") {
               const cellElement = document.getElementById(`node-${node.row}-${node.col}`);
               if (cellElement) {
-                cellElement.className = "cell-path";
+                const innerDiv = cellElement.querySelector('div');
+                if (innerDiv) {
+                  innerDiv.className = "absolute inset-0 bg-green-400 dark:bg-green-600";
+                }
               }
             }
           }
