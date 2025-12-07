@@ -185,7 +185,7 @@ const Pathfinding = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-8">
       <section className="mb-16">
         <Card>
           <CardHeader className="px-4 py-5 border-b border-gray-200 dark:border-gray-700">
