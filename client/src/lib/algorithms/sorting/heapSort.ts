@@ -1,4 +1,4 @@
-import { ArrayElement } from "@shared/schema";
+import { ArrayElement } from "@/lib/types";
 
 // Heap Sort Implementation with Animation Frames
 const heapSort = (originalArray: number[]) => {

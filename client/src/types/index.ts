@@ -1,4 +1,4 @@
-import { NodeType, Tool, PathfindingAlgorithm, SortingAlgorithm, GridNode, ArrayElement, AlgorithmMetrics } from "@shared/schema";
+import { NodeType, Tool, PathfindingAlgorithm, SortingAlgorithm, GridNode, ArrayElement, AlgorithmMetrics } from "@/lib/types";
 
 // Re-export types from schema for direct import in client code
 export type {

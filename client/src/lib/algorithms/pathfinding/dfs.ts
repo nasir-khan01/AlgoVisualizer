@@ -1,4 +1,4 @@
-import { GridNode } from "@shared/schema";
+import { GridNode } from "@/lib/types";
 
 // Depth-First Search Algorithm
 const dfs = (grid: GridNode[][], startNode: GridNode, endNode: GridNode) => {

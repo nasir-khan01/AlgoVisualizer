@@ -1,4 +1,4 @@
-import { ArrayElement } from "@shared/schema";
+import { ArrayElement } from "@/lib/types";
 
 // Quick Sort Implementation with Animation Frames
 const quickSort = (originalArray: number[]) => {

@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { GridNode, Tool } from "@shared/schema";
+import { GridNode, Tool } from "@/lib/types";
 
 export const useAlgorithm = (initialGridSize: { rows: number; cols: number }) => {
   const [grid, setGrid] = useState<GridNode[][]>([]);

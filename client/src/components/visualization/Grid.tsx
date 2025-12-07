@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GridNode, Tool } from "@shared/schema";
+import { GridNode, Tool } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 type GridProps = {

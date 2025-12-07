@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react";
-import { AlgorithmMetrics } from "@shared/schema";
+import { AlgorithmMetrics } from "@/lib/types";
 
 export const useAnimation = <T>() => {
   const [isAnimating, setIsAnimating] = useState(false);

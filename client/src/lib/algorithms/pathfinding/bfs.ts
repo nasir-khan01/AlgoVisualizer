@@ -1,4 +1,4 @@
-import { GridNode } from "@shared/schema";
+import { GridNode } from "@/lib/types";
 
 // Breadth-First Search Algorithm
 const bfs = (grid: GridNode[][], startNode: GridNode, endNode: GridNode) => {

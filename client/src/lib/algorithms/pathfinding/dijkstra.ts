@@ -1,4 +1,4 @@
-import { GridNode } from "@shared/schema";
+import { GridNode } from "@/lib/types";
 
 // Dijkstra's Algorithm
 const dijkstra = (grid: GridNode[][], startNode: GridNode, endNode: GridNode) => {

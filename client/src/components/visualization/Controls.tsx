@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tool, PathfindingAlgorithm, SortingAlgorithm } from "@shared/schema";
+import { Tool, PathfindingAlgorithm, SortingAlgorithm } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";

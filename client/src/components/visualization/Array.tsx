@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrayElement } from "@shared/schema";
+import { ArrayElement } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";

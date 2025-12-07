@@ -1,4 +1,4 @@
-import { ArrayElement } from "@shared/schema";
+import { ArrayElement } from "@/lib/types";
 
 // Bubble Sort Implementation with Animation Frames
 const bubbleSort = (originalArray: number[]) => {

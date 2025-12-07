@@ -8,10 +8,9 @@ import {
   Tool,
   PathfindingAlgorithm,
   AlgorithmMetrics,
-} from "@shared/schema";
+} from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { apiRequest } from "@/lib/queryClient";
 
 const Pathfinding = () => {
   const [gridSize, setGridSize] = useState({ rows: 20, cols: 20 });
@@ -142,7 +141,9 @@ const Pathfinding = () => {
         animationSpeed
       );
       
-      // Log the execution to the backend
+      
+      // Log the execution to the backend - REMOVED
+      /* 
       await apiRequest("POST", "/api/algorithm-results", {
         algorithm_type: "pathfinding",
         algorithm_name: selectedAlgorithm,
@@ -150,6 +151,7 @@ const Pathfinding = () => {
         metrics: algorithmMetrics,
         created_at: new Date().toISOString()
       });
+      */
       
     } catch (error) {
       console.error("Error visualizing algorithm:", error);

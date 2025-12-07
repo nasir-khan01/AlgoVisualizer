@@ -1,4 +1,4 @@
-import { ArrayElement } from "@shared/schema";
+import { ArrayElement } from "@/lib/types";
 
 // Insertion Sort Implementation with Animation Frames
 const insertionSort = (originalArray: number[]) => {

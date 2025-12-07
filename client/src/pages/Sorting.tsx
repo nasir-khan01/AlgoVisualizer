@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import Array from "@/components/visualization/Array";
 import Controls from "@/components/visualization/Controls";
 import { useAnimation } from "@/hooks/useAnimation";
-import { apiRequest } from "@/lib/queryClient";
-import { ArrayElement, SortingAlgorithm, AlgorithmMetrics } from "@shared/schema";
+import { ArrayElement, SortingAlgorithm, AlgorithmMetrics } from "@/lib/types";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 const Sorting = () => {
@@ -139,18 +138,7 @@ const Sorting = () => {
         }
       );
       
-      // Log the execution to the backend
-      await apiRequest("POST", "/api/algorithm-results", {
-        algorithm_type: "sorting",
-        algorithm_name: selectedAlgorithm,
-        params: {
-          arraySize,
-          algorithm: selectedAlgorithm,
-          initialArray: initialArray.map(el => el.value)
-        },
-        metrics: algorithmMetrics,
-        created_at: new Date().toISOString()
-      });
+      // Removed backend logging
       
     } catch (error) {
       console.error("Error during sorting:", error);

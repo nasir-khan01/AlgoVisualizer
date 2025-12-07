@@ -1,4 +1,4 @@
-import { GridNode } from "@shared/schema";
+import { GridNode } from "@/lib/types";
 
 // A* Pathfinding Algorithm
 const astar = (grid: GridNode[][], startNode: GridNode, endNode: GridNode) => {
